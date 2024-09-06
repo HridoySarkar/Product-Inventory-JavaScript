@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js "></script>
+    <link href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css " rel="stylesheet">
+    <title>Product Inventory</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="col-lg-12 mt-5">
+            <form action="">
+                <div class="row g-3">
+                    <div class="col">
+                      <input type="text" class="form-control" id="productName" placeholder="Product Name" aria-label="First name">
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" id="productPrice" placeholder="Price" aria-label="Last name">
+                    </div>
+                    <div>
+                        <button type="submit" id="addToInventory">Add to Inventory</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+        <div class="row mt-5">
+            <div class="col-6" id="showProducts">
+                
+            </div>
+            <div class="col-6">
+                <table class="table border">
+                    <thead>
+                      <tr>
+                        <th scope="col">Serial Number</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody id="cart">
+                      
+                    </tbody>
+                    <tfoot>
+                        
+                    </tfoot>
+                  </table>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+    <script src="./app.js"></script>
+</body>
+</html>
