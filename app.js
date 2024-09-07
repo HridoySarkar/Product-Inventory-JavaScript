@@ -40,7 +40,7 @@ function displayProduct(){
                     <div class="card-body text-center">
                       <h5 class="card-title">${element.name}</h5>
                       <p class="card-text">${element.price}</p>
-                      <a href="#" onclick="addToCart(${element.productId})" class="btn btn-primary">Add to Cart</a>
+                      <a href="#" onclick="addToCart(${index})" class="btn btn-primary">Add to Cart</a>
                     </div>
                   </div>`)
     }
@@ -57,7 +57,7 @@ function renderCartTable(){
                 <td>${item.id}</td>
                 <td>${item.name}</td>
                 <td>${item.price}</td>
-                <td><button onclick="removeItem(${item.id})" class="btn btn-small btn-danger">Remove</button></td>
+                <td><button onclick="removeItem(${index})" class="btn btn-small btn-danger">Remove</button></td>
             </tr>
             `)
     }
@@ -75,6 +75,8 @@ function addToCart(index){
 
 
 function removeItem(index){
-    cartItemList.splice(index);
+    cartItemList.splice(index,1);
     renderCartTable();
+    console.log(cartItemList);
+    
 }
