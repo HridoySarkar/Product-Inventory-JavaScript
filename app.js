@@ -49,9 +49,9 @@ function displayProduct(){
 
 function renderCartTable(){
     let cartTable = document.getElementById("cart");
-    cart.innerHTML="";
-    for (let index = 0; index < products.length; index++) {
-        const item = products[index];
+    cartTable.innerHTML="";
+    for (let index = 0; index < cartItemList.length; index++) {
+        const item = cartItemList[index];
         cartTable.insertAdjacentHTML("beforeend",`
             <tr>
                 <td>${item.id}</td>
@@ -71,12 +71,28 @@ function addToCart(index){
     
     renderCartTable();
     displayProduct();
+    updatePrice();
 }
 
 
 function removeItem(index){
     cartItemList.splice(index,1);
     renderCartTable();
+    updatePrice();
     console.log(cartItemList);
     
+}
+
+function updatePrice(){
+    let sum=null;
+    let updatePrice = document.getElementById("total_price");
+    updatePrice.innerHTML="";
+    for (let index = 0; index < cartItemList.length; index++) {
+        const item = cartItemList[index];
+        sum+= item.price * (item.quantity || 1);
+        updatePrice.innerHTML = sum;
+        
+    }
+
+                    
 }
