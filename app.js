@@ -15,14 +15,24 @@ fromData.addEventListener('submit',(e)=>{
         id:productId
     };
     if(productName==="" || productPrice==="" || isNaN(productPrice) || productPrice<=0){
-        alert("Please provide the product Name and Price!");
+        Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: "Please provide the Product Name and Price!"
+          });
         return;
     }
     productId++;
     let allProduct = JSON.parse(JSON.stringify(product));
     products.push(allProduct);
     fromData.reset();
-
+    Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Product has been to Cart!",
+        showConfirmButton: false,
+        timer: 1500
+      });
     displayProduct();
 
 });
@@ -54,8 +64,14 @@ function renderCartTable(){
         const item = cartItemList[index];
         cartTable.insertAdjacentHTML("beforeend",`
             <tr>
-                <td>${item.id}</td>
                 <td>${item.name}</td>
+                <td>
+                    <div class="d-flex justify-content-around">
+                        <span>1</span>
+                        <span> x </span>
+                        <span><input style="width:55px;" value="1" type="number" min="1"></input></span>
+                    </div>
+                </td>
                 <td>${item.price}</td>
                 <td><button onclick="removeItem(${index})" class="btn btn-small btn-danger">Remove</button></td>
             </tr>
@@ -68,18 +84,37 @@ function renderCartTable(){
 function addToCart(index){
     let selectedProduct = {...products[index]};
     cartItemList.unshift(selectedProduct);
-    
     renderCartTable();
-    displayProduct();
     updatePrice();
+    cartItemList.qty=1;
+    
 }
 
 
+
+
+
+
+
 function removeItem(index){
-    cartItemList.splice(index,1);
-    renderCartTable();
-    updatePrice();
-    console.log(cartItemList);
+    Swal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        denyButtonText: `No`
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire("Saved!", "", "success");
+          cartItemList.splice(index,1);
+          renderCartTable();
+          updatePrice();
+          console.log(cartItemList);
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
     
 }
 
