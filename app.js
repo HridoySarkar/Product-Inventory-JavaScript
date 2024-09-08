@@ -86,7 +86,7 @@ function addToCart(index){
     cartItemList.unshift(selectedProduct);
     renderCartTable();
     updatePrice();
-    cartItemList.qty=1;
+    cartItemList.quantity=1;
     
 }
 
@@ -106,7 +106,7 @@ function removeItem(index){
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire("Saved!", "", "success");
+          Swal.fire("Removed", "", "success");
           cartItemList.splice(index,1);
           renderCartTable();
           updatePrice();
@@ -128,6 +128,13 @@ function updatePrice(){
         updatePrice.innerHTML = sum;
         
     }
+    cartList();                
+}
 
-                    
+
+//cart list
+function cartList(){
+    let list = document.getElementById("count_list");
+    list.innerHTML="";
+    list.innerHTML = cartItemList.length;
 }
